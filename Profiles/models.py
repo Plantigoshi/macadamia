@@ -7,7 +7,14 @@ def content_file_name(instance, filename):
 
 class UserProfile(models.Model):
 
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User,
+                                related_name='user')
+
+    friends = models.ManyToManyField('self',
+                                     null=True,
+                                     blank=True,
+                                     symmetrical=False,
+                                     related_name='friendship')
 
     profile_picture = models.ImageField(null=True,
                                         blank=True,

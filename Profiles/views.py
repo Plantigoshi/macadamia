@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from .models import UserProfile
+from .serializers import ProfileSerializer
+from .serializers import NoDetailProfileSerializer
+
+
+class ProfileViewSet(viewsets.ModelViewSet):
+
+    model = UserProfile
+    serializer_class = NoDetailProfileSerializer
