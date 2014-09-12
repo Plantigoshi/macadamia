@@ -10,4 +10,5 @@ profile_router = routers.SimpleRouter()
 profile_router.register(r'profiles', ProfileViewSet)
 
 urlpatterns = patterns('',
+                       url(r'^', include('Farms.urls')),
                        url(r'^', include(profile_router.urls)),)
