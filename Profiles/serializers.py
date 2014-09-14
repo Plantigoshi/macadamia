@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from .models import UserProfile
+from .models import Friendship
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -48,3 +49,15 @@ class NoDetailProfileSerializer(serializers.ModelSerializer):
         fields = ('id',
                   'user',
                   'profile_picture', )
+
+
+class FriendshipSerializer(serializers.ModelSerializer):
+
+    creator = ProfileSerializer()
+    friend = ProfileSerializer()
+
+    class Meta:
+        model = Friendship
+        fields = ('created',
+                  'creator',
+                  'friend', )

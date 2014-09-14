@@ -22,7 +22,7 @@ class UserProfile(models.Model):
 
 class Friendship(models.Model):
 
-    created = models.DateTimeField(auto_naddd=True,
+    created = models.DateTimeField(auto_now_add=True,
                                    editable=False)
 
     creator = models.ForeignKey(UserProfile,
