@@ -17,8 +17,7 @@ class FarmPlantViewSet(viewsets.ModelViewSet):
     serializer_class = PlantSerializer
 
     def get_queryset(self):
-        print self.__dict__
-        return Plant.objects.filter(owner=self.request.user,
+        return Plant.objects.filter(owner__id=self.kwargs['profile_pk'],
                                     farm__id=self.kwargs['farm_pk'])
 
 
@@ -27,4 +26,4 @@ class PlantViewSet(viewsets.ModelViewSet):
     serializer_class = PlantSerializer
 
     def get_queryset(self):
-        return Plant.objects.filter(owner=self.request.user)
+        return Plant.objects.filter(owner=self.kwargs['profile_pk'])
