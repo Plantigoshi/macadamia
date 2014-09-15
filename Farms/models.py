@@ -56,3 +56,22 @@ class Plant(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class ReadParameter(models.Model):
+
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=120)
+
+    def __unicode__(self):
+        return self.name
+
+class Readvalue(models.Model):
+
+    id = models.AutoField(primary_key=True)
+    read_parameter = models.ForeignKey(ReadParameter)
+    value = models.FloatField()
+
+    def __unicode__(self):
+        return "".format(self.read_parameter.name,
+                         self.value)
