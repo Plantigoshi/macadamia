@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Plant, Farm, PlantSpecie
+from .models import Plant, Farm, PlantSpecie, OptimalParameter
 from Profiles.serializers import NoDetailProfileSerializer
 
 
@@ -19,6 +19,14 @@ class PlantSpecieSerializer(serializers.ModelSerializer):
         model = PlantSpecie
 
 
+class OptimaParameterSerializer(serializers.ModelSerializer):
+
+    plant_specie = PlantSpecieSerializer()
+
+    class Meta:
+        model = OptimalParameter
+
+
 class PlantSerializer(serializers.ModelSerializer):
 
     owner = NoDetailProfileSerializer()
@@ -26,4 +34,3 @@ class PlantSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Plant
-
