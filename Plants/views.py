@@ -7,7 +7,7 @@ from .models import OptimalParameter
 from .serializers import OptimalParameterSerializer
 
 from .models import Plant
-from .models import PlantSerializer
+from .serializers import PlantSerializer
 
 class PlantSpecieViewSet(viewsets.ModelViewSet):
 
@@ -32,3 +32,11 @@ class PlantViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Plant.objects.filter(farm__id=self.kwargs['farm_pk'],
                                     owner__id=self.kwargs['profile_pk'])
+
+
+class UserPlantViewSet(viewsets.ModelViewSet):
+
+    serializer_class = PlantSerializer
+
+    def get_queryset(self):
+        return Plant.objects.filter(owner__id=self.kwargs['profile_pk'])

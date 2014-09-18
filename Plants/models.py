@@ -3,6 +3,9 @@ from django.db import models
 from Farms.models import Farm
 from Profiles.models import UserProfile
 
+from PIL import Image as ImagePIL
+from PIL import ImageOps
+
 
 def content_file_name(instance, filename):
     return '/'.join(['plants', instance.name])
@@ -17,6 +20,19 @@ class PlantSpecie(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return self.image.url
+
+    def save(self, *args, **kwargs):
+        if not self.id and not self.plant_picture:
+            return
+
+        super(PlantSpecie, self).save()
+        plant_picture = ImagePIL.open(self.plant_picture)
+        plant_picture = ImageOps.fit(plant_picture,
+                                     (640, 640), ImagePIL.ANTIALIAS)
+        plant_picture.save(self.plant_picture.path, format= 'JPEG')
 
 
 class OptimalParameter(models.Model):
@@ -45,5 +61,5 @@ class Plant(models.Model):
 
     def __unicode__(self):
         return "{} is a {} with id {}".format(self.name,
-                                              self.PlantSpecie.name,
+                                              self.plant_specie.name,
                                               self.id)

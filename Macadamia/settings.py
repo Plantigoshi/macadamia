@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'Farms',
+    'Plants',
     'Profiles',
     'rest_framework',
     'django.contrib.admin',
